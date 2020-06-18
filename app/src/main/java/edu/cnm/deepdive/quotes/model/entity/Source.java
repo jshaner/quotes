@@ -19,8 +19,7 @@ public class Source {
   @ColumnInfo(collate = ColumnInfo.NOCASE)
   private String name = "";
 
-  public long getId() {
-    return id;
+  public long getId() { return id;
   }
 
   public void setId(long id) {
