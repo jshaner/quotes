@@ -10,16 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 import edu.cnm.deepdive.quotes.R;
 import edu.cnm.deepdive.quotes.model.entity.Quote;
 import edu.cnm.deepdive.quotes.model.pojo.QuoteWithSource;
+import edu.cnm.deepdive.quotes.view.QuoteAdapter;
 import edu.cnm.deepdive.quotes.viewmodel.MainViewModel;
 import java.lang.reflect.Array;
 
 public class QuotesFragment extends Fragment {
 
   private MainViewModel mainViewModel;
-  private ListView quoteList;
+  private RecyclerView quoteList;
 
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -27,9 +29,7 @@ public class QuotesFragment extends Fragment {
     //noinspection ConstantConditions
     mainViewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     mainViewModel.getQuotes().observe(getViewLifecycleOwner(), (quotes) -> {
-      ArrayAdapter<QuoteWithSource> adapter =
-          new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, quotes);
-      quoteList.setAdapter(adapter);
+      quoteList.setAdapter(new QuoteAdapter(getContext(), quotes));
     });
   }
 
