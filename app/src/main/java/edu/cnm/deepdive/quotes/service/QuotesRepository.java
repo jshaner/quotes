@@ -30,6 +30,11 @@ public class QuotesRepository {
 
   }
 
+  public Single<QuoteWithSource> getQuote(long id) {
+    return quoteDao.selectById(id)
+        .subscribeOn(Schedulers.io());
+  }
+
   //TODO Add other methods as necessary.
 
 }
